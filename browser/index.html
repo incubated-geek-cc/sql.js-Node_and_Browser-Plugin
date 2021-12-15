@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Use correct character set. -->
+	    <meta charset="utf-8">
+	    <meta name="description" content="Singapore One Map 3D Environment">
+	    <meta name="keywords" content="OneMap3D, Singapore Map, Singapore 3D Map">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	    <!-- Tell IE to use the latest, best version (or Chrome Frame if pre-IE11). -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />  
+	    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+	    <meta http-equiv="Content-Language" content="en" />
+	    <meta name="msapplication-TileColor" content="#ffffff" />
+	    <meta name="theme-color" content="#ffffff" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="mobile-web-app-capable" content="yes" />
+	    <meta name="HandheldFriendly" content="True" />
+	    <meta name="MobileOptimized" content="320" />  
+	    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> 
+		<!-- <link href="https://unpkg.com/leaflet@1.0.0/dist/leaflet.css" rel="stylesheet" type="text/css" /> -->
+		<!-- <script src="https://unpkg.com/leaflet@1.0.0/dist/leaflet-src.js"></script> -->
+		<!-- <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script> -->
+		<!-- <script src="http://ivansanchez.gitlab.io/Leaflet.TileLayer.MBTiles/Leaflet.TileLayer.MBTiles.js"></script> -->
+		<link href="css/leaflet.css" rel="stylesheet" type="text/css" />
+		<script src="js/leaflet-src.js"></script>
+		<script src="js/sql.js"></script>
+		<script src="js/leaflet.mbtiles.js"></script>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
+  		<title>Offline Basemap Demo | Leaflet MBTiles</title>
+</head>
+<body>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<div id="map"></div>
+	 <script>
+	 	var southWest = new L.LatLng(1.22557, 103.67592);
+        var northEast = new L.LatLng(1.4267, 104.02542);
+        var bounds = new L.LatLngBounds(southWest, northEast);
+
+        var mapCenter=new L.LatLng( 1.326135, 103.85067000000001 );
+
+        var map = L.map("map", {
+          	zoomControl:true,
+          	zoom: 11,
+			center: mapCenter
+        });
+
+        var mb = new L.tileLayer.mbTiles('light_all.mbtiles', {
+          minZoom: 11,
+          maxZoom: 15,
+          attribution: "<span class='prefix-attribution'><a href='https://www.onemap.sg/home/'><img src='img/onemap.png' height='25px' width='25px' alt='onemap logo' /></a> New OneMap | Map data © contributors, <a href='http://SLA.gov.sg'>SLA</a> | <a href='https://www.buymeacoffee.com/geekcc' target='_blank'>Buy me a coffee! ☕</a></span>",
+          zoomControl: false
+        });
+        mb.on("databaseloaded", function(ev) {
+        	console.info("MBTiles DB loaded", ev);
+         	mb.addTo(map);
+         	map.fitBounds(bounds);
+			map.setZoom(11);
+			map.setView(mapCenter, 13);
+      	});
+		mb.on("databaseerror", function(ev) {
+			console.info("MBTiles DB error", ev);
+		});
+	</script>
+</body>
+</html>

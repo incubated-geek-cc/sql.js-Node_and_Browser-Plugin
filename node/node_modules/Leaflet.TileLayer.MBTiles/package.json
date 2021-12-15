@@ -1,0 +1,12 @@
+{
+  "name": "Leaflet.TileLayer.MBTiles",
+  "version": "1.0.0",
+  "description": "Load MBTiles packages into Leaflet maps",
+  "main": "Leaflet.TileLayer.MBTiles.js",
+  "author": "Iván Sánchez Ortega <ivan@sanchezortega.es>",
+  "license": "Beerware",
+  "repository": {
+    "url": "https://gitlab.com/IvanSanchez/Leaflet.TileLayer.MBTiles.git",
+    "type": "git"
+  }
+}

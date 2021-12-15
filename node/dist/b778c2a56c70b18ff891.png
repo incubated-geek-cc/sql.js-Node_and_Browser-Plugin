@@ -1,0 +1,1 @@
+export default __webpack_public_path__ + "asset/css/images/layers-2xpng";
